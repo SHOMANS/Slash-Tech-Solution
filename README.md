@@ -1,31 +1,159 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Slash Tech Solution Website
 
-## Getting Started
+A modern, responsive landing page and product showcase for Slash Tech Solution, built with Next.js 16, TypeScript, Tailwind CSS v4, and Framer Motion.
 
-First, run the development server:
+## 🚀 Features
+
+- **Modern Stack**: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4
+- **Smooth Animations**: Framer Motion for engaging scroll animations and transitions
+- **Dark Mode**: System-aware theme switching with manual toggle
+- **Responsive Design**: Mobile-first approach with beautiful layouts on all devices
+- **Product Pages**: Dedicated pages for Slash POS and Tourer products
+- **Portfolio Section**: Showcase of demo projects and case studies
+- **Form Validation**: React Hook Form with Zod schema validation
+- **Optimized Performance**: Fast loading times and smooth interactions
+
+## 📦 Tech Stack
+
+- **Framework**: Next.js 16.1.1
+- **UI Library**: React 19.2.3
+- **Styling**: Tailwind CSS v4
+- **Animations**: Framer Motion
+- **Form Management**: React Hook Form + Zod
+- **Icons**: Lucide React
+- **Theme**: next-themes
+- **Language**: TypeScript 5
+- **Package Manager**: pnpm 10.13.1
+
+## 🎨 Sections
+
+### Home Page (`/`)
+
+- Hero Section with animated gradient background
+- About Us section with company information
+- Services showcase (6 core services)
+- Products overview (Slash POS & Tourer)
+- Portfolio with demo projects
+- Client testimonials and logos
+- Contact form with validation
+
+### Product Pages
+
+- **Slash POS** (`/slash-pos`) - Web-based POS system
+- **Tourer** (`/tourer`) - South Africa tourism mobile app
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js 20.x or higher
+- pnpm 10.x or higher
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Clone the repository
+git clone <your-repo-url>
+cd slash-tech-solution
+
+# Install dependencies
+pnpm install
+
+# Copy environment variables (optional)
+cp .env.example .env.local
+
+# Run development server
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Development
+pnpm dev          # Start development server
 
-## Learn More
+# Production
+pnpm build        # Build for production
+pnpm start        # Start production server
 
-To learn more about Next.js, take a look at the following resources:
+# Code Quality
+pnpm lint         # Run ESLint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Customization
+
+### Update Content
+
+1. **Company Information**: Edit content in component files under `/components/sections/`
+2. **Product Details**: Update `/app/slash-pos/page.tsx` and `/app/tourer/page.tsx`
+3. **Portfolio Projects**: Modify the projects array in `/components/sections/portfolio-section.tsx`
+4. **Contact Info**: Update details in `/components/sections/contact-section.tsx`
+
+### Update Styling
+
+- **Colors**: Modify brand colors in `/app/globals.css` under `@theme inline`
+- **Components**: Customize UI components in `/components/ui/`
+- **Typography**: Update font settings in `/app/layout.tsx`
+
+### Configure Contact Form
+
+Replace the placeholder submission logic in `/components/sections/contact-section.tsx`:
+
+```typescript
+// TODO: Replace with actual API endpoint
+await fetch('/api/contact', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(data),
+});
+```
+
+## 🌙 Dark/Light Mode
+
+The website includes a fully functional dark/light mode system:
+
+- **System Preference**: Automatically detects your system theme on first visit
+- **Manual Toggle**: Click the sun/moon icon in the navbar to switch themes
+- **Persistent**: Theme choice is saved in local storage
+- **Smooth Transitions**: Animated theme changes with icon rotations
+
+## 📱 Responsive Design
+
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: > 1024px
+
+Navigation automatically switches to mobile menu below 1024px.
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub/GitLab/Bitbucket
+2. Import your repository to [Vercel](https://vercel.com)
+3. Vercel will automatically detect Next.js and configure the build
+4. Deploy!
+
+### Other Platforms
+
+```bash
+# Build the application
+pnpm build
+
+# The output will be in the `.next` folder
+# Start the production server
+pnpm start
+```
+
+## 📄 License
+
+This project is private and proprietary.
+
+## 🤝 Support
+
+For support, email info@slashtech.com
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
