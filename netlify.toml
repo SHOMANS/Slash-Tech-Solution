@@ -1,0 +1,19 @@
+[build]
+  command = "npx prisma generate && pnpm build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Exclude prisma seed files from secrets scanning
+[context.production.environment]
+  SECRETS_SCAN_OMIT_PATHS = "prisma/**"
+
+[context.deploy-preview.environment]
+  SECRETS_SCAN_OMIT_PATHS = "prisma/**"
+
+[context.branch-deploy.environment]
+  SECRETS_SCAN_OMIT_PATHS = "prisma/**"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
