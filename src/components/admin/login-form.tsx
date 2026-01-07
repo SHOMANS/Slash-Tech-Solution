@@ -35,7 +35,6 @@ export function LoginForm() {
             required
             className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-900 sm:text-sm"
             placeholder="Email address"
-            defaultValue="admin@slashtech.com"
           />
         </div>
         <div>
@@ -56,12 +55,6 @@ export function LoginForm() {
 
       <div>
         <LoginButton />
-      </div>
-
-      <div className="text-xs text-center text-gray-500 dark:text-gray-400 space-y-1">
-        <p>Default credentials:</p>
-        <p>Email: admin@slashtech.com</p>
-        <p>Password: admin123</p>
       </div>
     </form>
   )

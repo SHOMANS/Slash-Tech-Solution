@@ -37,10 +37,17 @@ A modern, responsive landing page and product showcase for Slash Tech Solution, 
 - Client testimonials and logos
 - Contact form with validation
 
-### Product Pages
+### Dynamic Product Pages
 
-- **Slash POS** (`/slash-pos`) - Web-based POS system
-- **Tourer** (`/tourer`) - South Africa tourism mobile app
+- **Product Details** (`/product/[id]`) - Dynamic product pages with type-based rendering (web/mobile)
+  - Web products display with browser mockup and blue/cyan theme
+  - Mobile products display with phone mockup and purple/pink theme
+
+### Admin Panel
+
+- **Analytics Dashboard** (`/admin/analytics`) - Track website visits and user analytics
+- **Content Management** - Manage products, services, portfolio, clients, and testimonials
+- **Secure Login** - Protected admin routes with JWT authentication
 
 ## 🛠️ Getting Started
 
@@ -86,16 +93,16 @@ pnpm lint         # Run ESLint
 
 ### Update Content
 
-1. **Company Information**: Edit content in component files under `/components/sections/`
-2. **Product Details**: Update `/app/slash-pos/page.tsx` and `/app/tourer/page.tsx`
-3. **Portfolio Projects**: Modify the projects array in `/components/sections/portfolio-section.tsx`
-4. **Contact Info**: Update details in `/components/sections/contact-section.tsx`
+1. **Company Information**: Edit content in component files under `/src/components/sections/`
+2. **Product Details**: Use the admin panel at `/admin/products` to manage products
+3. **Portfolio Projects**: Use the admin panel at `/admin/portfolio` to manage projects
+4. **Contact Info**: Update details in `/src/components/sections/contact-section.tsx`
 
 ### Update Styling
 
-- **Colors**: Modify brand colors in `/app/globals.css` under `@theme inline`
-- **Components**: Customize UI components in `/components/ui/`
-- **Typography**: Update font settings in `/app/layout.tsx`
+- **Colors**: Modify brand colors in `/src/app/globals.css` under `@theme inline`
+- **Components**: Customize UI components in `/src/components/ui/`
+- **Typography**: Update font settings in `/src/app/layout.tsx`
 
 ### Configure Contact Form
 

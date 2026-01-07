@@ -3,26 +3,24 @@ import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
 import bcrypt from 'bcryptjs';
 
-const pool = new Pool({
-  host: 'aws-1-eu-west-1.pooler.supabase.com',
-  port: 6543,
-  user: 'postgres.mbauatxjibpbudczwllq',
-  password: 'SHoman10*$S',
-  database: 'postgres',
-});
+const connectionString = process.env.DATABASE_URL || '';
+const pool = new Pool({ connectionString });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log('Creating admin user...');
 
-  const hashedPassword = await bcrypt.hash('admin123', 10);
+  const defaultPassword = process.env.ADMIN_DEFAULT_PASSWORD || 'admin123';
+  const hashedPassword = await bcrypt.hash(defaultPassword, 10);
+
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@slashtech.com';
 
   const admin = await prisma.admin.upsert({
-    where: { email: 'admin@slashtech.com' },
+    where: { email: adminEmail },
     update: {},
     create: {
-      email: 'admin@slashtech.com',
+      email: adminEmail,
       password: hashedPassword,
       name: 'Admin User',
       active: true,
@@ -30,8 +28,8 @@ async function main() {
   });
 
   console.log('Admin user created!');
-  console.log('Email: admin@slashtech.com');
-  console.log('Password: admin123');
+  console.log('Email:', adminEmail);
+  console.log('Password:', defaultPassword);
   console.log('Please change this password after first login');
 }
 

@@ -7,8 +7,8 @@ export function VisitTracker() {
   const pathname = usePathname()
 
   useEffect(() => {
-    // Don't track admin pages or API routes
-    if (pathname?.startsWith('/admin') || pathname?.startsWith('/api')) {
+    // Don't track admin pages, login, or API routes
+    if (pathname?.startsWith('/admin') || pathname?.startsWith('/api') || pathname === '/login') {
       return
     }
 
@@ -25,7 +25,6 @@ export function VisitTracker() {
         })
       } catch (error) {
         // Silently fail - don't disrupt user experience
-        console.error('Failed to track visit:', error)
       }
     }
 
