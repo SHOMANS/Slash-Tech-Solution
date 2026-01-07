@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/admin/products', label: 'Products' },
   { href: '/admin/testimonials', label: 'Testimonials' },
   { href: '/admin/contacts', label: 'Contacts' },
+  { href: '/admin/analytics', label: 'Analytics' },
 ]
 
 export function AdminNav() {
@@ -30,8 +31,8 @@ export function AdminNav() {
           key={link.href}
           href={link.href}
           className={`transition-colors ${isActive(link.href)
-              ? 'text-blue-600 dark:text-blue-400 font-semibold'
-              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            ? 'text-blue-600 dark:text-blue-400 font-semibold'
+            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
             }`}
         >
           {link.label}

@@ -49,13 +49,13 @@ export function ProductCard({ product, index }: ProductCardProps) {
         <div className={`${index % 2 === 1 ? 'lg:order-2' : ''}`}>
           <div className="relative group">
             <div className={`absolute -inset-1 bg-gradient-to-r ${color} rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300`} />
-            <div className="relative rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800">
+            <div className="relative rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 max-h-[400px] flex items-center justify-center">
               <Image
                 src={product.image}
                 alt={product.title}
                 width={600}
                 height={400}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain max-h-[400px]"
               />
             </div>
           </div>

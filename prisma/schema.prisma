@@ -113,3 +113,18 @@ model Admin {
 
   @@map("admins")
 }
+
+model Visit {
+  id        String   @id @default(cuid())
+  ip        String
+  userAgent String?
+  page      String
+  referrer  String?
+  country   String?
+  city      String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([page])
+  @@map("visits")
+}
