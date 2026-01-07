@@ -1,8 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Section, SectionHeader } from "@/components/ui/section"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -77,8 +75,6 @@ const benefits = [
 export default function SlashPOSPage() {
   return (
     <main className="min-h-screen">
-      <Navbar />
-
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 pt-20">
         <div className="absolute inset-0 overflow-hidden">
@@ -301,8 +297,6 @@ export default function SlashPOSPage() {
           </motion.div>
         </div>
       </Section>
-
-      <Footer />
     </main>
   )
 }

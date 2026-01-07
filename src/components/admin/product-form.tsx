@@ -60,7 +60,7 @@ export function ProductForm({ product }: ProductFormProps) {
         description: formData.get('description') as string,
         image: image,
         heroImage: heroImage || '',
-        productType: formData.get('productType') as string,
+        productType: formData.get('productType') as 'web' | 'mobile',
         features: features.split(',').map(f => f.trim()).filter(Boolean),
         benefits: benefits.split(',').map(b => b.trim()).filter(Boolean),
         price: (formData.get('price') as string) || '',

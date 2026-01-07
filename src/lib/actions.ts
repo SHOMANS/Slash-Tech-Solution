@@ -75,7 +75,13 @@ export async function getTestimonials() {
       orderBy: { createdAt: 'desc' },
       take: 3, // Only get the 3 newest testimonials
     });
-    return testimonials;
+
+    // Map database fields to expected interface
+    return testimonials.map((t) => ({
+      ...t,
+      name: t.author,
+      message: t.quote,
+    }));
   } catch (error) {
     console.error('Error fetching testimonials:', error);
     return [];
