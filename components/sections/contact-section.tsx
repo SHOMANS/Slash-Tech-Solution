@@ -5,10 +5,12 @@ import { Section, SectionHeader } from "@/components/ui/section"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
+import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { submitContact } from "@/lib/actions"
+import { useState } from "react"
 
 const contactInfo = [
   {
@@ -41,6 +43,9 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>
 
 export function ContactSection() {
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+
   const {
     register,
     handleSubmit,
@@ -53,18 +58,18 @@ export function ContactSection() {
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      // TODO: Replace with actual API endpoint
-      // await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(data),
-      // })
+      setSubmitError(null)
+      const result = await submitContact(data)
 
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      reset()
+      if (result.success) {
+        setSubmitSuccess(true)
+        reset()
+        setTimeout(() => setSubmitSuccess(false), 5000)
+      } else {
+        setSubmitError(result.error || "Failed to send message")
+      }
     } catch (error) {
-      // Handle error appropriately in production
-      throw error
+      setSubmitError("An unexpected error occurred. Please try again.")
     }
   }
 
@@ -219,6 +224,27 @@ export function ContactSection() {
                 </p>
               )}
             </div>
+
+            {submitSuccess && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-800 dark:text-green-200"
+              >
+                <CheckCircle2 className="h-5 w-5" />
+                <p>Message sent successfully! We'll get back to you soon.</p>
+              </motion.div>
+            )}
+
+            {submitError && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-800 dark:text-red-200"
+              >
+                <p>{submitError}</p>
+              </motion.div>
+            )}
 
             <Button type="submit" size="lg" className="w-full group" disabled={isSubmitting}>
               {isSubmitting ? "Sending..." : "Send Message"}

@@ -7,8 +7,11 @@ import { ProductsSection } from "@/components/sections/products-section"
 import { PortfolioSection } from "@/components/sections/portfolio-section"
 import { ClientsSection } from "@/components/sections/clients-section"
 import { ContactSection } from "@/components/sections/contact-section"
+import { getTestimonials } from "@/lib/actions"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const testimonials = await getTestimonials()
+
   return (
     <main className="min-h-screen">
       <Navbar />
@@ -17,7 +20,7 @@ export default function HomePage() {
       <ServicesSection />
       <ProductsSection />
       <PortfolioSection />
-      <ClientsSection />
+      <ClientsSection testimonials={testimonials} />
       <ContactSection />
       <Footer />
     </main>

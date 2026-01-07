@@ -1,21 +1,17 @@
 import Link from "next/link"
 import { Facebook, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react"
+import prisma from "@/lib/prisma"
 
-const footerLinks = {
-  products: [
-    { name: "Slash POS", href: "/slash-pos" },
-    { name: "Tourer App", href: "/tourer" },
-  ],
-  company: [
-    { name: "About Us", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Contact", href: "#contact" },
-  ],
-  legal: [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Service", href: "#" },
-  ],
-}
+const companyLinks = [
+  { name: "About Us", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Contact", href: "#contact" },
+]
+
+const legalLinks = [
+  { name: "Privacy Policy", href: "#" },
+  { name: "Terms of Service", href: "#" },
+]
 
 const XIcon = () => (
   <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
@@ -30,7 +26,17 @@ const socialLinks = [
   { name: "Instagram", icon: Instagram, href: "#" },
 ]
 
-export function Footer() {
+export async function Footer() {
+  // Fetch active products for dynamic footer links
+  const products = await prisma.product.findMany({
+    where: { active: true },
+    orderBy: { order: 'asc' },
+    select: {
+      id: true,
+      title: true,
+    },
+  })
+
   return (
     <footer className="bg-gray-50 dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -69,13 +75,13 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Products</h3>
             <ul className="space-y-3">
-              {footerLinks.products.map((link) => (
-                <li key={link.name}>
+              {products.map((product) => (
+                <li key={product.id}>
                   <Link
-                    href={link.href}
+                    href={`/product/${product.id}`}
                     className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors duration-200 text-sm"
                   >
-                    {link.name}
+                    {product.title}
                   </Link>
                 </li>
               ))}
@@ -86,7 +92,7 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Company</h3>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {companyLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
@@ -126,7 +132,7 @@ export function Footer() {
               © {new Date().getFullYear()} Slash Tech Solution. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              {footerLinks.legal.map((link) => (
+              {legalLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}

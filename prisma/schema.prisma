@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+  read      Boolean  @default(false)
+
+  @@map("contacts")
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  icon        String   // Icon name from lucide-react
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("services")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  slug        String?  @unique // URL slug like 'slash-pos' or 'tourer'
+  title       String
+  subtitle    String?  // Badge subtitle like "Web-Based POS System"
+  description String   @db.Text
+  image       String   // Card image shown in products section
+  heroImage   String?  // Hero image for product page
+  productType String   @default("web") // "web" or "mobile"
+  features    String[] // Array of product features
+  benefits    String[] // Array of benefits/highlights
+  price       String?  // Optional price display
+  order       Int      @default(0)
+  featured    Boolean  @default(false)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("products")
+}
+
+model Portfolio {
+  id           String   @id @default(cuid())
+  title        String
+  description  String   @db.Text
+  image        String
+  technologies String[] // Array of technology names
+  liveUrl      String?
+  githubUrl    String?
+  order        Int      @default(0)
+  featured     Boolean  @default(false)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("portfolio")
+}
+
+model Client {
+  id        String   @id @default(cuid())
+  name      String
+  logo      String
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("clients")
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  quote     String   @db.Text
+  author    String
+  email     String
+  role      String
+  company   String
+  rating    Int      @default(5) // 1-5 stars
+  avatar    String?
+  approved  Boolean  @default(false) // Requires admin approval
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("testimonials")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // Hashed password
+  name      String
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("admins")
+}

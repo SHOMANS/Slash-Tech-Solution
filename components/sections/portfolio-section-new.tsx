@@ -1,6 +1,7 @@
 import { Section } from "@/components/ui/section"
 import prisma from "@/lib/prisma"
 import { PortfolioCard } from "./portfolio-card"
+import { motion } from "framer-motion"
 
 export async function PortfolioSection() {
   const projects = await prisma.portfolio.findMany({
