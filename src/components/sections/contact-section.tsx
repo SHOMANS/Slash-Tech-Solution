@@ -128,19 +128,6 @@ export function ContactSection() {
                 </motion.a>
               ))}
             </div>
-
-            {/* Map Placeholder - Hidden */}
-            {/* <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative h-64 rounded-2xl overflow-hidden bg-gray-200 dark:bg-gray-800"
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <MapPin className="h-12 w-12 text-gray-400" />
-              </div>
-            </motion.div> */}
           </motion.div>
         </div>
 

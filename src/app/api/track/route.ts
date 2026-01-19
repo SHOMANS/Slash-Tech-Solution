@@ -6,11 +6,26 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { page, referrer } = body;
 
+    // Only track home page and product pages
+    if (page !== '/' && !page.startsWith('/product/')) {
+      return NextResponse.json({ success: true, skipped: true });
+    }
+
     // Get IP address
     const ip =
       request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
       request.headers.get('x-real-ip') ||
       'unknown';
+
+    // Skip localhost/development traffic
+    if (
+      ip.startsWith('127.0.0') ||
+      ip === '::1' ||
+      ip === 'localhost' ||
+      ip === 'unknown'
+    ) {
+      return NextResponse.json({ success: true, skipped: true });
+    }
 
     // Get user agent
     const userAgent = request.headers.get('user-agent') || undefined;

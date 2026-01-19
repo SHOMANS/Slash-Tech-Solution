@@ -30,38 +30,20 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
     dateFilter = { createdAt: { gte: monthAgo } }
   }
 
-  // Filter for public pages only (exclude /login, /admin routes and localhost)
-  const publicPagesFilter = {
-    NOT: [
-      { page: { startsWith: '/login' } },
-      { page: { startsWith: '/admin' } },
-      { ip: { startsWith: '127.0.0' } },
-      { ip: { equals: '::1' } },
-      { ip: { equals: 'localhost' } },
-    ]
-  }
-
-  // Combine filters
-  const whereFilter = {
-    ...dateFilter,
-    ...publicPagesFilter,
-  }
-
   // Fetch visits
   const [visits, totalCount, todayCount, weekCount, monthCount] = await Promise.all([
     prisma.visit.findMany({
-      where: whereFilter,
+      where: dateFilter,
       orderBy: { createdAt: 'desc' },
       take: limit,
       skip,
     }),
-    prisma.visit.count({ where: whereFilter }),
+    prisma.visit.count({ where: dateFilter }),
     prisma.visit.count({
       where: {
         createdAt: {
           gte: new Date(new Date().setHours(0, 0, 0, 0)),
         },
-        ...publicPagesFilter,
       },
     }),
     prisma.visit.count({
@@ -69,7 +51,6 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
         createdAt: {
           gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
         },
-        ...publicPagesFilter,
       },
     }),
     prisma.visit.count({
@@ -77,7 +58,6 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
         createdAt: {
           gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
         },
-        ...publicPagesFilter,
       },
     }),
   ])
@@ -85,7 +65,6 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
   // Get popular pages
   const popularPages = await prisma.visit.groupBy({
     by: ['page'],
-    where: publicPagesFilter,
     _count: { page: true },
     orderBy: { _count: { page: 'desc' } },
     take: 10,
@@ -94,7 +73,7 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
   // Get unique visitors (unique IPs)
   const uniqueVisitors = await prisma.visit.groupBy({
     by: ['ip'],
-    where: whereFilter,
+    where: dateFilter,
   })
 
   const totalPages = Math.ceil(totalCount / limit)
