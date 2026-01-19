@@ -1,12 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { Pool } from 'pg';
-import { PrismaPg } from '@prisma/adapter-pg';
+import prisma from '../src/lib/prisma';
 import bcrypt from 'bcryptjs';
-
-const connectionString = process.env.DATABASE_URL || '';
-const pool = new Pool({ connectionString });
-const adapter = new PrismaPg(pool);
-const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log('Creating admin user...');
@@ -14,7 +7,7 @@ async function main() {
   const defaultPassword = process.env.ADMIN_DEFAULT_PASSWORD || 'admin123';
   const hashedPassword = await bcrypt.hash(defaultPassword, 10);
 
-  const adminEmail = process.env.ADMIN_EMAIL || 'admin@slashtech.com';
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@slashsolution.com';
 
   const admin = await prisma.admin.upsert({
     where: { email: adminEmail },
@@ -36,11 +29,9 @@ async function main() {
 main()
   .then(async () => {
     await prisma.$disconnect();
-    await pool.end();
   })
   .catch(async (e) => {
     console.error(e);
     await prisma.$disconnect();
-    await pool.end();
     process.exit(1);
   });

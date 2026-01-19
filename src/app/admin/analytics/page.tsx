@@ -17,7 +17,7 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
   const skip = (page - 1) * limit
 
   // Calculate date filter based on period
-  let dateFilter = {}
+  let dateFilter: any = {}
   const now = new Date()
   if (period === 'today') {
     const startOfDay = new Date(now.setHours(0, 0, 0, 0))
@@ -30,20 +30,38 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
     dateFilter = { createdAt: { gte: monthAgo } }
   }
 
+  // Filter for public pages only (exclude /login, /admin routes and localhost)
+  const publicPagesFilter = {
+    NOT: [
+      { page: { startsWith: '/login' } },
+      { page: { startsWith: '/admin' } },
+      { ip: { startsWith: '127.0.0' } },
+      { ip: { equals: '::1' } },
+      { ip: { equals: 'localhost' } },
+    ]
+  }
+
+  // Combine filters
+  const whereFilter = {
+    ...dateFilter,
+    ...publicPagesFilter,
+  }
+
   // Fetch visits
   const [visits, totalCount, todayCount, weekCount, monthCount] = await Promise.all([
     prisma.visit.findMany({
-      where: dateFilter,
+      where: whereFilter,
       orderBy: { createdAt: 'desc' },
       take: limit,
       skip,
     }),
-    prisma.visit.count({ where: dateFilter }),
+    prisma.visit.count({ where: whereFilter }),
     prisma.visit.count({
       where: {
         createdAt: {
           gte: new Date(new Date().setHours(0, 0, 0, 0)),
         },
+        ...publicPagesFilter,
       },
     }),
     prisma.visit.count({
@@ -51,6 +69,7 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
         createdAt: {
           gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
         },
+        ...publicPagesFilter,
       },
     }),
     prisma.visit.count({
@@ -58,6 +77,7 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
         createdAt: {
           gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
         },
+        ...publicPagesFilter,
       },
     }),
   ])
@@ -65,6 +85,7 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
   // Get popular pages
   const popularPages = await prisma.visit.groupBy({
     by: ['page'],
+    where: publicPagesFilter,
     _count: { page: true },
     orderBy: { _count: { page: 'desc' } },
     take: 10,
@@ -73,7 +94,7 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
   // Get unique visitors (unique IPs)
   const uniqueVisitors = await prisma.visit.groupBy({
     by: ['ip'],
-    where: dateFilter,
+    where: whereFilter,
   })
 
   const totalPages = Math.ceil(totalCount / limit)
@@ -169,8 +190,8 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
         <Link
           href="/admin/analytics?period=all"
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${period === 'all'
-              ? 'border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
-              : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            ? 'border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
+            : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
             }`}
         >
           All Time
@@ -178,8 +199,8 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
         <Link
           href="/admin/analytics?period=today"
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${period === 'today'
-              ? 'border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
-              : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            ? 'border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
+            : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
             }`}
         >
           Today
@@ -187,8 +208,8 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
         <Link
           href="/admin/analytics?period=week"
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${period === 'week'
-              ? 'border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
-              : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            ? 'border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
+            : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
             }`}
         >
           This Week
@@ -196,8 +217,8 @@ export default async function AnalyticsPage(props: AnalyticsPageProps) {
         <Link
           href="/admin/analytics?period=month"
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${period === 'month'
-              ? 'border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
-              : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            ? 'border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
+            : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
             }`}
         >
           This Month
