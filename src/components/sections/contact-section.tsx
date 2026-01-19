@@ -16,14 +16,14 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    content: "info@slashtech.com",
-    href: "mailto:info@slashtech.com"
+    content: "info@slashsolution.com",
+    href: "mailto:info@slashsolution.com"
   },
   {
     icon: Phone,
-    title: "Call Us",
-    content: "+27 123 456 7890",
-    href: "tel:+27123456789"
+    title: "Phone",
+    content: "+27 60 153 4356",
+    href: "tel:+27601534356"
   },
   {
     icon: MapPin,

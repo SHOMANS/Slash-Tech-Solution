@@ -113,11 +113,11 @@ export async function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start space-x-2 text-sm text-gray-600 dark:text-gray-400">
                 <Mail className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                <span>info@slashtech.com</span>
+                <span>info@slashsolution.com</span>
               </li>
               <li className="flex items-start space-x-2 text-sm text-gray-600 dark:text-gray-400">
                 <Phone className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                <span>+27 123 456 7890</span>
+                <span>+27 60 153 4356</span>
               </li>
               <li className="flex items-start space-x-2 text-sm text-gray-600 dark:text-gray-400">
                 <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0" />
