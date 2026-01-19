@@ -40,7 +40,7 @@ export async function createService(data: z.infer<typeof serviceSchema>) {
 
 export async function updateService(
   id: string,
-  data: z.infer<typeof serviceSchema>
+  data: z.infer<typeof serviceSchema>,
 ) {
   const validated = serviceSchema.parse(data);
   await prisma.service.update({ where: { id }, data: validated });
@@ -75,7 +75,7 @@ const portfolioSchema = z.object({
 
 export async function getPortfolioProjects(
   page: number = 1,
-  limit: number = 10
+  limit: number = 10,
 ) {
   const skip = (page - 1) * limit;
   const [projects, total] = await Promise.all([
@@ -103,7 +103,7 @@ export async function createPortfolio(data: z.infer<typeof portfolioSchema>) {
 
 export async function updatePortfolio(
   id: string,
-  data: z.infer<typeof portfolioSchema>
+  data: z.infer<typeof portfolioSchema>,
 ) {
   const validated = portfolioSchema.parse(data);
   await prisma.portfolio.update({ where: { id }, data: validated });
@@ -153,7 +153,7 @@ export async function createClient(data: z.infer<typeof clientSchema>) {
 
 export async function updateClient(
   id: string,
-  data: z.infer<typeof clientSchema>
+  data: z.infer<typeof clientSchema>,
 ) {
   const validated = clientSchema.parse(data);
   await prisma.client.update({ where: { id }, data: validated });
@@ -176,7 +176,7 @@ export async function toggleClientActive(id: string, active: boolean) {
 // Testimonials
 export async function getTestimonialsAdmin(
   page: number = 1,
-  limit: number = 10
+  limit: number = 10,
 ) {
   const skip = (page - 1) * limit;
   const [testimonials, total] = await Promise.all([
@@ -290,10 +290,20 @@ export async function createProduct(data: z.infer<typeof productSchema>) {
 
 export async function updateProduct(
   id: string,
-  data: z.infer<typeof productSchema>
+  data: z.infer<typeof productSchema>,
 ) {
   const validated = productSchema.parse(data);
-  await prisma.product.update({ where: { id }, data: validated });
+
+  // Get the current product to check if slug is being changed
+  const currentProduct = await prisma.product.findUnique({ where: { id } });
+
+  // If slug is empty or same as current, exclude it from update to avoid unique constraint error
+  const updateData = { ...validated };
+  if (!validated.slug || validated.slug === currentProduct?.slug) {
+    delete updateData.slug;
+  }
+
+  await prisma.product.update({ where: { id }, data: updateData });
   revalidatePath('/admin/products');
   revalidatePath('/');
 }
