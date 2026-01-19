@@ -20,10 +20,9 @@ const XIcon = () => (
 )
 
 const socialLinks = [
-  { name: "Facebook", icon: Facebook, href: "#" },
-  { name: "X", icon: XIcon, href: "#" },
-  { name: "LinkedIn", icon: Linkedin, href: "#" },
-  { name: "Instagram", icon: Instagram, href: "#" },
+  { name: "X", icon: XIcon, href: "https://x.com/slashsolution" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com/company/slashsolution" },
+  { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/slash.solution/" },
 ]
 
 export async function Footer() {
