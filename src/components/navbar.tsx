@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
+import { NavLink } from "@/components/nav-link"
 import { cn } from "@/lib/utils"
 
 const navigation = [
@@ -61,13 +62,13 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
             {navigation.map((item) => (
-              <Link
+              <NavLink
                 key={item.name}
                 href={item.href}
                 className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-200"
               >
                 {item.name}
-              </Link>
+              </NavLink>
             ))}
           </div>
 

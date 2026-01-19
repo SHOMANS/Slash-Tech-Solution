@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Facebook, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react"
+import { NavLink } from "@/components/nav-link"
 import prisma from "@/lib/prisma"
 
 const companyLinks = [
@@ -61,6 +62,8 @@ export async function Footer() {
                 <Link
                   key={social.name}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors duration-200"
                   aria-label={social.name}
                 >
@@ -76,12 +79,12 @@ export async function Footer() {
             <ul className="space-y-3">
               {products.map((product) => (
                 <li key={product.id}>
-                  <Link
+                  <NavLink
                     href={`/product/${product.id}`}
                     className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors duration-200 text-sm"
                   >
                     {product.title}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>

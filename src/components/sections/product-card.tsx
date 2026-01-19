@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import Link from "next/link"
+import { NavLink } from "@/components/nav-link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
@@ -90,12 +90,12 @@ export function ProductCard({ product, index }: ProductCardProps) {
             ))}
           </div>
 
-          <Link href={`/product/${product.id}`}>
+          <NavLink href={`/product/${product.id}`}>
             <Button className="group">
               Learn More
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
-          </Link>
+          </NavLink>
         </div>
       </div>
     </motion.div>
