@@ -2,13 +2,12 @@ import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
 
+const connectionString = process.env.DATABASE_URL || '';
+
 const prismaClientSingleton = () => {
   const pool = new Pool({
-    host: 'aws-1-eu-west-1.pooler.supabase.com',
-    port: 5432,
-    user: 'postgres.mbauatxjibpbudczwllq',
-    password: 'SHoman10*$S',
-    database: 'postgres',
+    connectionString,
+    max: 1, // Limit to 1 connection for serverless
   });
   const adapter = new PrismaPg(pool);
   return new PrismaClient({ adapter });
