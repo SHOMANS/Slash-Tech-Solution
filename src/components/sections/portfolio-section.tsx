@@ -21,10 +21,19 @@ export async function PortfolioSection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project, index) => (
-          <PortfolioCard key={project.id} project={project} index={index} />
-        ))}
+      <div className="relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 blur-md pointer-events-none">
+          {projects.map((project, index) => (
+            <PortfolioCard key={project.id} project={project} index={index} />
+          ))}
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm px-8 py-6 rounded-2xl shadow-2xl border-2 border-blue-600">
+            <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Coming Soon
+            </h3>
+          </div>
+        </div>
       </div>
     </Section>
   )

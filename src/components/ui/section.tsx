@@ -49,7 +49,7 @@ export function SectionHeader({
           {subtitle}
         </p>
       )}
-      <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+      <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
         {title}
       </h2>
       {description && (
