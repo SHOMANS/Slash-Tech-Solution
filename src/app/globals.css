@@ -132,3 +132,58 @@ html {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+/* ═══════════════════════════════════════ V2 Design System ═══════════════════════════════════════ */
+
+/* V2 CSS Custom Properties */
+.v2 {
+  --bg: #070707;
+  --ink: #f5f5f1;
+  --ink-dim: #8d8d83;
+  --line: #1f1f1d;
+  --accent: #c6ff3d;
+  --accent-2: #ff4d2e;
+  color-scheme: dark;
+}
+
+/* V2 Text Selection */
+.v2 ::selection {
+  background: #c6ff3d;
+  color: #070707;
+}
+
+/* V2 Cursor hide — V2 uses a custom cursor; hide the OS cursor */
+.v2, .v2 *, .v2 a, .v2 button { cursor: none; }
+@media (pointer: coarse) { .v2, .v2 *, .v2 a, .v2 button { cursor: auto; } }
+
+/* V2 Scrollbar */
+.v2 ::-webkit-scrollbar { width: 6px; }
+.v2 ::-webkit-scrollbar-track { background: #070707; }
+.v2 ::-webkit-scrollbar-thumb { background: #1f1f1d; }
+.v2 ::-webkit-scrollbar-thumb:hover { background: #c6ff3d; }
+
+/* V2 Animation Keyframes */
+@keyframes v2-grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -3%); }
+  30% { transform: translate(3%, 2%); }
+  50% { transform: translate(-1%, 4%); }
+  70% { transform: translate(2%, -2%); }
+  90% { transform: translate(-3%, 1%); }
+}
+
+@keyframes v2-glitch-1 {
+  0%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
+  20% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 1px); }
+  40% { clip-path: inset(50% 0 30% 0); transform: translate(3px, -1px); }
+  60% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 2px); }
+  80% { clip-path: inset(10% 0 80% 0); transform: translate(2px, -2px); }
+}
+
+@keyframes v2-glitch-2 {
+  0%, 100% { clip-path: inset(100% 0 0 0); transform: translate(0); }
+  20% { clip-path: inset(60% 0 20% 0); transform: translate(3px, -1px); }
+  40% { clip-path: inset(30% 0 50% 0); transform: translate(-3px, 1px); }
+  60% { clip-path: inset(10% 0 70% 0); transform: translate(2px, -2px); }
+  80% { clip-path: inset(80% 0 10% 0); transform: translate(-2px, 2px); }
+}
