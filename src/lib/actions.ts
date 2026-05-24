@@ -88,6 +88,18 @@ export async function getTestimonials() {
   }
 }
 
+export async function getProducts() {
+  try {
+    return await prisma.product.findMany({
+      where: { active: true },
+      orderBy: { order: 'asc' },
+    })
+  } catch (error) {
+    console.error('Error fetching products:', error)
+    return []
+  }
+}
+
 export async function getAllTestimonials(page: number = 1, limit: number = 10) {
   try {
     const skip = (page - 1) * limit;

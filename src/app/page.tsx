@@ -8,6 +8,7 @@ import { PortfolioSection } from "@/components/sections/portfolio-section"
 import { ClientsSection } from "@/components/sections/clients-section"
 import { ContactSection } from "@/components/sections/contact-section"
 import { getTestimonials } from "@/lib/actions"
+import { VersionToggle } from "@/components/version-toggle"
 
 export default async function HomePage() {
   const testimonials = await getTestimonials()
@@ -23,6 +24,7 @@ export default async function HomePage() {
       <ClientsSection testimonials={testimonials} />
       <ContactSection />
       <Footer />
+      <VersionToggle href="/new" label="✦ New Design →" variant="v1" />
     </main>
   )
 }
