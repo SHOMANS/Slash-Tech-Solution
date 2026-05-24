@@ -192,3 +192,9 @@ html {
 @media (max-width: 767px) {
   .v2-nav-links, .v2-nav-time { display: none !important; }
 }
+
+/* V2 Hero — mobile responsive */
+@media (max-width: 767px) {
+  .v2-hero-grid { grid-template-columns: 1fr !important; }
+  .v2-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
