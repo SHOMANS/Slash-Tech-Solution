@@ -279,6 +279,11 @@ html {
   .v2-product-grid { grid-template-columns: 1fr !important; }
 }
 
+/* V2 Contact — mobile responsive */
+@media (max-width: 767px) {
+  .v2-contact-grid { grid-template-columns: 1fr !important; }
+}
+
 /* V2 Footer — link hover */
 .v2-footer-link { color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
 .v2-footer-link:hover { color: var(--ink); }
