@@ -278,3 +278,13 @@ html {
 @media (max-width: 767px) {
   .v2-product-grid { grid-template-columns: 1fr !important; }
 }
+
+/* V2 Footer — link hover */
+.v2-footer-link { color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
+.v2-footer-link:hover { color: var(--ink); }
+
+/* V2 Footer — mobile responsive */
+@media (max-width: 767px) {
+  .v2-footer-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .v2-footer-wordmark { font-size: clamp(50px, 12vw, 120px) !important; }
+}
