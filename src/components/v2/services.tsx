@@ -122,6 +122,7 @@ export function ServicesV2({ services }: ServicesV2Props) {
             <div
               key={service.id}
               className="v2-service-card"
+              data-cursor="VIEW"
               style={{
                 borderRight: col < 2 ? '1px solid var(--line)' : undefined,
                 borderBottom: row < totalRows - 1 ? '1px solid var(--line)' : undefined,

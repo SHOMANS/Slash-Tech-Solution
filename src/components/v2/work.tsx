@@ -201,6 +201,7 @@ export function WorkV2({ portfolio }: WorkV2Props) {
                       href={item.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-cursor="OPEN"
                       style={{
                         color: 'var(--accent)',
                         textDecoration: 'none',

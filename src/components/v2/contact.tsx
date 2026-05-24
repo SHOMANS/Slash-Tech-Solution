@@ -318,6 +318,7 @@ export function ContactV2() {
               {/* Submit button */}
               <button
                 type="submit"
+                data-cursor="SEND"
                 disabled={status === 'submitting' || status === 'success'}
                 style={{
                   marginTop:  24,

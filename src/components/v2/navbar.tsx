@@ -86,6 +86,7 @@ export function NavbarV2() {
         )}
         <a
           href="#contact"
+          data-cursor="GO"
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '8px 14px',

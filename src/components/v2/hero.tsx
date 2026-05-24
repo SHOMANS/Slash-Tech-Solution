@@ -2,6 +2,8 @@
 
 import { SlashField } from '@/components/v2/effects/slash-field'
 import { Ticker } from '@/components/v2/effects/ticker'
+import { Magnetic } from '@/components/v2/effects/magnetic'
+import { ScrambleText } from '@/components/v2/effects/scramble-text'
 
 const STATS = [
   { end: 150, suffix: '+',  label: 'Projects delivered'  },
@@ -77,20 +79,21 @@ export function HeroV2() {
               textAlign: 'right',
             }}
           >
-            Transforming ideas into digital reality
+            <ScrambleText text="Transforming ideas into digital reality" trigger="view" duration={1400} />
           </div>
         </div>
 
-        {/* 2. Monumental headline */}
+        {/* 2. Monumental headline — mixBlendMode: difference gives inversion effect over SlashField */}
         <h1
           style={{
             fontFamily: 'var(--v2-display), "Anton", system-ui, sans-serif',
-            fontSize: 'clamp(64px, 16vw, 260px)',
-            lineHeight: 0.85,
+            fontSize: 'clamp(64px, 18vw, 320px)',
+            lineHeight: 0.82,
             letterSpacing: '-0.02em',
             textTransform: 'uppercase',
             margin: 0,
-            color: 'var(--ink)',
+            color: '#fff',
+            mixBlendMode: 'difference',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.06em' }}>
@@ -101,6 +104,7 @@ export function HeroV2() {
                 fontStyle: 'italic',
                 fontSize: '0.65em',
                 color: 'var(--accent)',
+                mixBlendMode: 'normal',
               }}
             >
               that
@@ -112,6 +116,7 @@ export function HeroV2() {
                 color: 'var(--accent)',
                 display: 'inline-block',
                 transform: 'skewX(-12deg)',
+                mixBlendMode: 'normal',
               }}
             >
               /
@@ -136,7 +141,7 @@ export function HeroV2() {
             style={{
               fontFamily: 'var(--v2-serif), "Instrument Serif", Georgia, serif',
               fontStyle: 'italic',
-              fontSize: 'clamp(22px, 2.2vw, 36px)',
+              fontSize: 'clamp(22px, 2.6vw, 40px)',
               lineHeight: 1.15,
               color: 'var(--ink)',
               margin: 0,
@@ -149,9 +154,11 @@ export function HeroV2() {
                 fontFamily: 'var(--v2-display), "Anton", system-ui, sans-serif',
                 fontStyle: 'normal',
                 color: 'var(--accent)',
+                textTransform: 'uppercase',
+                letterSpacing: '.01em',
               }}
             >
-              Slash POS
+              Slash&nbsp;POS
             </span>{' '}
             and{' '}
             <span
@@ -159,6 +166,8 @@ export function HeroV2() {
                 fontFamily: 'var(--v2-display), "Anton", system-ui, sans-serif',
                 fontStyle: 'normal',
                 color: 'var(--accent)',
+                textTransform: 'uppercase',
+                letterSpacing: '.01em',
               }}
             >
               Tourer
@@ -175,43 +184,47 @@ export function HeroV2() {
               alignItems: 'flex-end',
             }}
           >
-            {/* Primary CTA */}
-            <a
-              href="#contact"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 12,
-                padding: '18px 28px',
-                background: '#c6ff3d',
-                color: '#000',
-                borderRadius: 999,
-                textDecoration: 'none',
-                fontFamily: 'var(--v2-mono), ui-monospace, monospace',
-                fontSize: 14,
-                fontWeight: 600,
-                letterSpacing: '0.02em',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              Start a project
-              <span
+            {/* Primary CTA — Magnetic pull on hover */}
+            <Magnetic strength={0.35}>
+              <a
+                href="#contact"
+                data-cursor="LET'S GO"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 32,
-                  height: 32,
-                  borderRadius: '50%',
-                  background: '#000',
-                  color: '#c6ff3d',
-                  fontSize: 16,
-                  lineHeight: 1,
+                  gap: 14,
+                  padding: '22px 30px',
+                  background: 'var(--accent)',
+                  color: '#000',
+                  borderRadius: 999,
+                  textDecoration: 'none',
+                  fontFamily: 'var(--v2-mono), ui-monospace, monospace',
+                  fontSize: 13,
+                  fontWeight: 700,
+                  letterSpacing: '.1em',
+                  textTransform: 'uppercase',
+                  whiteSpace: 'nowrap',
                 }}
               >
-                ↗
-              </span>
-            </a>
+                Start a project
+                <span
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '50%',
+                    background: '#000',
+                    display: 'grid',
+                    placeItems: 'center',
+                    color: 'var(--accent)',
+                    fontSize: 16,
+                    lineHeight: 1,
+                    flexShrink: 0,
+                  }}
+                >
+                  ↗
+                </span>
+              </a>
+            </Magnetic>
 
             {/* Secondary CTA */}
             <a
@@ -219,10 +232,12 @@ export function HeroV2() {
               style={{
                 fontFamily: 'var(--v2-mono), ui-monospace, monospace',
                 fontSize: 11,
+                letterSpacing: '.1em',
+                textTransform: 'uppercase',
                 color: 'var(--ink-dim)',
                 textDecoration: 'none',
                 borderBottom: '1px solid var(--line)',
-                paddingBottom: 2,
+                paddingBottom: 4,
               }}
             >
               or — see our products ↓
@@ -237,13 +252,13 @@ export function HeroV2() {
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
             gap: 40,
-            marginTop: 80,
+            marginTop: 100,
             paddingTop: 30,
             borderTop: '1px solid var(--line)',
           }}
         >
-          {STATS.map((stat) => (
-            <div key={stat.label}>
+          {STATS.map((stat, i) => (
+            <div key={stat.label} style={{ animationDelay: `${i * 100}ms` }}>
               <div
                 style={{
                   fontFamily: 'var(--v2-display), "Anton", system-ui, sans-serif',

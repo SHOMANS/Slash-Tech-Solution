@@ -364,6 +364,7 @@ export function ProductsV2({ products }: ProductsV2Props) {
             <div style={{ marginTop: 36 }}>
               <a
                 href={product.slug ? `/product/${product.slug}` : '#contact'}
+                data-cursor={product.slug ? 'DEMO' : 'CONTACT'}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',

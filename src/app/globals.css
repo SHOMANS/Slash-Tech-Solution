@@ -156,6 +156,13 @@ html {
 .v2, .v2 *, .v2 a, .v2 button { cursor: none; }
 @media (pointer: coarse) { .v2, .v2 *, .v2 a, .v2 button { cursor: auto; } }
 
+/* V2 Cursor — expanded dot state on data-cursor hover */
+.v2-cursor-lg {
+  width: 64px !important;
+  height: 64px !important;
+  transition: width 0.22s ease, height 0.22s ease;
+}
+
 /* V2 Scrollbar */
 .v2 ::-webkit-scrollbar { width: 6px; }
 .v2 ::-webkit-scrollbar-track { background: #070707; }
@@ -236,7 +243,6 @@ html {
   min-height: 300px;
   overflow: hidden;
   transition: background 0.3s;
-  cursor: default;
 }
 .v2-service-card:hover { background: #0a0a0a; }
 .v2-service-card .v2-service-bg-num {
