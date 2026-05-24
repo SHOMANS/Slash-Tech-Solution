@@ -228,3 +228,48 @@ html {
   .v2-about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   .v2-cards-grid { grid-template-columns: 1fr !important; }
 }
+
+/* V2 Services — card hover effects */
+.v2-service-card {
+  position: relative;
+  padding: 36px;
+  min-height: 300px;
+  overflow: hidden;
+  transition: background 0.3s;
+  cursor: default;
+}
+.v2-service-card:hover { background: #0a0a0a; }
+.v2-service-card .v2-service-bg-num {
+  transition: color 0.3s, opacity 0.3s;
+}
+.v2-service-card:hover .v2-service-bg-num {
+  color: var(--accent);
+  opacity: 0.1;
+}
+.v2-service-card .v2-service-desc {
+  transition: opacity 0.3s, transform 0.3s;
+}
+.v2-service-card:hover .v2-service-desc {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+.v2-service-arrow {
+  transition: transform 0.4s cubic-bezier(0.7,0,0.2,1), color 0.3s, border-color 0.3s;
+}
+.v2-service-card:hover .v2-service-arrow {
+  transform: rotate(-45deg);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* V2 Services — mobile responsive */
+@media (max-width: 767px) {
+  .v2-services-grid { grid-template-columns: 1fr !important; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .v2-services-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* V2 Work — row hover effect */
+.v2-work-row { transition: background 0.2s; }
+.v2-work-row:hover { background: #0a0a0a; }
