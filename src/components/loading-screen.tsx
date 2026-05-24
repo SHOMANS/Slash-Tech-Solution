@@ -6,11 +6,13 @@ export function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Hide loading screen after initial load
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 2000)
-
+    try {
+      if (localStorage.getItem('slash-design') === 'v2') {
+        setIsLoading(false)
+        return
+      }
+    } catch (e) {}
+    const timer = setTimeout(() => setIsLoading(false), 2000)
     return () => clearTimeout(timer)
   }, [])
 

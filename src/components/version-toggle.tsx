@@ -1,16 +1,29 @@
-import Link from 'next/link'
+'use client'
 
 interface VersionToggleProps {
-  href: string
   label: string
+  target: 'v1' | 'v2'
   variant?: 'v1' | 'v2'
 }
 
-export function VersionToggle({ href, label, variant = 'v1' }: VersionToggleProps) {
+export function VersionToggle({ label, target, variant = 'v1' }: VersionToggleProps) {
+  const handleClick = () => {
+    if (target === 'v2') {
+      localStorage.setItem('slash-design', 'v2')
+      document.documentElement.setAttribute('data-design', 'v2')
+    } else {
+      localStorage.removeItem('slash-design')
+      document.documentElement.removeAttribute('data-design')
+      if (window.location.pathname !== '/') {
+        window.location.href = '/'
+      }
+    }
+  }
+
   if (variant === 'v2') {
     return (
-      <Link
-        href={href}
+      <button
+        onClick={handleClick}
         style={{
           position: 'fixed',
           bottom: '1.5rem',
@@ -27,18 +40,18 @@ export function VersionToggle({ href, label, variant = 'v1' }: VersionToggleProp
           fontSize: '11px',
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
-          textDecoration: 'none',
           whiteSpace: 'nowrap',
+          cursor: 'pointer',
         }}
       >
         {label}
-      </Link>
+      </button>
     )
   }
 
   return (
-    <Link
-      href={href}
+    <button
+      onClick={handleClick}
       style={{
         position: 'fixed',
         bottom: '1.5rem',
@@ -53,12 +66,13 @@ export function VersionToggle({ href, label, variant = 'v1' }: VersionToggleProp
         color: '#ffffff',
         fontSize: '0.8125rem',
         fontWeight: 500,
-        textDecoration: 'none',
+        border: 'none',
         boxShadow: '0 4px 14px rgba(139, 92, 246, 0.35)',
         whiteSpace: 'nowrap',
+        cursor: 'pointer',
       }}
     >
       {label}
-    </Link>
+    </button>
   )
 }

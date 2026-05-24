@@ -43,7 +43,7 @@ export function V2Layout({ services, portfolio, products, clients, testimonials 
         <ContactV2 />
       </main>
       <FooterV2 products={products} />
-      <VersionToggle href="/" label="← Classic Design" variant="v2" />
+      <VersionToggle label="← Classic Design" target="v1" variant="v2" />
     </>
   )
 }

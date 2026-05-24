@@ -299,3 +299,8 @@ html {
   .v2-footer-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .v2-footer-wordmark { font-size: clamp(50px, 12vw, 120px) !important; }
 }
+
+/* ── Design switcher — V2 hidden by default, shown when html[data-design="v2"] ── */
+[data-design-v2] { display: none; }
+html[data-design="v2"] [data-design-v1] { display: none; }
+html[data-design="v2"] [data-design-v2] { display: block; }
