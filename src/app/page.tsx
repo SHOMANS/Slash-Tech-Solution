@@ -77,7 +77,7 @@ export default async function HomePage() {
       <div
         data-design-v2=""
         className={`v2 ${anton.variable} ${bebasNeue.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
-        style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--ink)' }}
+        style={{ display: 'none', background: 'var(--bg)', minHeight: '100vh', color: 'var(--ink)' }}
       >
         <V2Layout
           services={services}

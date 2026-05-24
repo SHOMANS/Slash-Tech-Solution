@@ -300,7 +300,6 @@ html {
   .v2-footer-wordmark { font-size: clamp(50px, 12vw, 120px) !important; }
 }
 
-/* ── Design switcher — V2 hidden by default, shown when html[data-design="v2"] ── */
-[data-design-v2] { display: none; }
-html[data-design="v2"] [data-design-v1] { display: none; }
-html[data-design="v2"] [data-design-v2] { display: block; }
+/* ── Design switcher — V2 has display:none inline in HTML; !important overrides when v2 is active ── */
+html[data-design="v2"] [data-design-v1] { display: none !important; }
+html[data-design="v2"] [data-design-v2] { display: block !important; }
