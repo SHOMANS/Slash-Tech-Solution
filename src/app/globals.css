@@ -273,3 +273,8 @@ html {
 /* V2 Work — row hover effect */
 .v2-work-row { transition: background 0.2s; }
 .v2-work-row:hover { background: #0a0a0a; }
+
+/* V2 Products — mobile responsive */
+@media (max-width: 767px) {
+  .v2-product-grid { grid-template-columns: 1fr !important; }
+}
