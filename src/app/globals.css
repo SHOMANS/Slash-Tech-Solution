@@ -303,3 +303,7 @@ html {
 /* ── Design switcher — V2 has display:none inline in HTML; !important overrides when v2 is active ── */
 html[data-design="v2"] [data-design-v1] { display: none !important; }
 html[data-design="v2"] [data-design-v2] { display: block !important; }
+
+/* ── V2 form placeholder — readable on dark terminal background ── */
+.v2 input::placeholder,
+.v2 textarea::placeholder { color: var(--ink-dim); opacity: 1; }

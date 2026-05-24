@@ -14,8 +14,9 @@ interface ProductPageProps {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params
-  const product = await prisma.product.findUnique({
-    where: { id },
+  // Support both slug (e.g. "slash-pos") and CUID (legacy links)
+  const product = await prisma.product.findFirst({
+    where: { OR: [{ slug: id }, { id }] },
   })
 
   if (!product || !product.active) {

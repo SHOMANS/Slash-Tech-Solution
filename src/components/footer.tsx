@@ -33,6 +33,7 @@ export async function Footer() {
     orderBy: { order: 'asc' },
     select: {
       id: true,
+      slug: true,
       title: true,
     },
   })
@@ -80,7 +81,7 @@ export async function Footer() {
               {products.map((product) => (
                 <li key={product.id}>
                   <NavLink
-                    href={`/product/${product.id}`}
+                    href={`/product/${product.slug || product.id}`}
                     className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors duration-200 text-sm"
                   >
                     {product.title}
